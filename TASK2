@@ -55,3 +55,4 @@ if __name__ == "__main__":
         data = read_data(input_file)
         summary = analyze_data(data)
         generate_pdf_report(summary, output_file)
+output of the task 2https://github.com/koppu-6002/API-INTEGRATION-AND-DATA-VISUALIZATION/issues/2#issue-2782379035
