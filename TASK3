@@ -1,0 +1,33 @@
+import requests 
+import spacy
+def load_nlp_model():
+   
+     try:
+        return spacy.load("en_core_web_sm")
+        print(f"Error loading NLP model: {e}")
+        return None
+   def:
+    process_query(nlp, query):
+    doc = nlp(query)
+    if "weather" in query.lower():
+        return "I'm unable to provide live weather updates, but I suggest checking a reliable weather service."
+        
+    elif "name" in query.lower():
+        return "I'm a chatbot built using spacy to demonstrate natural language processing capabilities."
+    else:
+        return "I'm sorry, I didn't understand your query. Can you please rephrase?"
+def chatbot():
+ 
+    print("Chatbot is now running. Type 'exit' to quit.")
+    nlp = load_nlp_model()
+    if not nlp:
+        print("Unable to run chatbot due to NLP model load failure.")
+        return
+    while True:
+        user_input = input("You: ")
+        if user_input.lower() == "exit":
+            print("Chatbot: Goodbye!")
+    response = process_query(nlp, user_input)
+        print(f"Chatbot: {response}")
+if __name__ == "__main__":
+    chatbot()
