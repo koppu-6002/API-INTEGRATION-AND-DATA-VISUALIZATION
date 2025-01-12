@@ -1,0 +1,53 @@
+# API-INTEGRATION-AND-DATA-VISUALIZATIONimport requests
+import matplotlib.pyplot as plt
+
+# API Key from OpenWeatherMap
+API_KEY = 'your_api_key'  # Replace with your own API key
+
+# Base URL of the OpenWeather API
+BASE_URL = 'http://api.openweathermap.org/data/2.5/weather'
+
+# City for which we want the weather data
+CITY = 'London'
+
+# Construct the API request URL
+url = f'{BASE_URL}?q={CITY}&appid={API_KEY}&units=metric'  # units=metric to get temperature in Celsius
+
+# Send the request
+response = requests.get(url)
+
+# Check if the request was successful
+if response.status_code == 200:
+    # Parse the JSON data
+    data = response.json()
+    
+    # Extracting relevant data
+    city_name = data['name']
+    temperature = data['main']['temp']
+    humidity = data['main']['humidity']
+    pressure = data['main']['pressure']
+    
+    # Print the data
+    print(f"Weather in {city_name}:")
+    print(f"Temperature: {temperature}°C")
+    print(f"Humidity: {humidity}%")
+    print(f"Pressure: {pressure} hPa")
+    
+    # Data for visualization
+    labels = ['Temperature', 'Humidity', 'Pressure']
+    values = [temperature, humidity, pressure]
+
+    # Create a bar chart
+    plt.bar(labels, values, color=['blue', 'green', 'red'])
+    
+    # Adding titles and labels
+    plt.title(f"Weather data for {city_name}")
+    plt.ylabel('Values')
+    plt.show()
+    
+else:
+    print(f"Failed to retrieve data. Status code: {response.status_code}")Weather in London:
+Temperature: 15.5°C
+Humidity: 82%
+Pressure: 1012 hPa
+
