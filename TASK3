@@ -31,3 +31,4 @@ def chatbot():
         print(f"Chatbot: {response}")
 if __name__ == "__main__":
     chatbot()
+output of the task 3 https://github.com/koppu-6002/API-INTEGRATION-AND-DATA-VISUALIZATION/issues/3#issue-2782379828
