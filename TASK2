@@ -1,0 +1,57 @@
+import csv
+import os
+from fpdf import FPDF
+
+def read_data(file_path):
+    
+    data = []
+    try:
+        with open(file_path, 'r') as file:
+            reader = csv.reader(file)
+            headers = next(reader)
+            for row in reader:
+                data.append(dict(zip(headers, row)))
+    except Exception as e:
+        print(f"Error reading file: {e}")
+    return data
+
+def analyze_data(data):
+    
+    summary = {
+        "total_rows": len(data),
+        "columns": list(data[0].keys()) if data else [],
+        "sample_row": data[0] if data else None
+    }
+    return summary
+
+def generate_pdf_report(summary, output_path):
+
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.set_font("Arial", size=12)
+    pdf.cell(200, 10, txt="Data Analysis Report", ln=True, align='C')
+    pdf.ln(10)
+    pdf.set_font("Arial", size=10)
+    pdf.cell(0, 10, txt=f"Total Rows: {summary['total_rows']}", ln=True)
+    pdf.cell(0, 10, txt=f"Columns: {', '.join(summary['columns'])}", ln=True)
+    if summary['sample_row']:
+        pdf.ln(5)
+        pdf.cell(0, 10, txt="Sample Row:", ln=True)
+        for key, value in summary['sample_row'].items():
+            pdf.cell(0, 10, txt=f"  {key}: {value}", ln=True)
+    try:
+        pdf.output(output_path)
+        print(f"PDF report generated: {output_path}")
+    except Exception as e:
+        print(f"Error generating PDF: {e}")
+
+if __name__ == "__main__":
+    
+    input_file = "sample_data.csv"
+    output_file = "data_analysis_report.pdf"
+    if not os.path.exists(input_file):
+        print(f"Input file '{input_file}' not found.")
+    else:
+        data = read_data(input_file)
+        summary = analyze_data(data)
+        generate_pdf_report(summary, output_file)
