@@ -23,3 +23,4 @@ print(classification_report(y_test, y_pred))
 import joblib
 joblib.dump(model, 'spam_classifier_model.pkl')
 joblib.dump(vectorizer, 'count_vectorizer.pkl')
+output of the task 4 https://github.com/koppu-6002/API-INTEGRATION-AND-DATA-VISUALIZATION/issues/4#issue-2782380552
